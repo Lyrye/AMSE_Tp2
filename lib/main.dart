@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
 
   //static Exercice1 exo1 = new Exercice1();
-  static Exercice2 exo2 = new Exercice2();
+  static Exercice3 exo3 = new Exercice3();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Expanded(child: exo2)
+            Expanded(child: exo3)
           ],
         ),
       ),
