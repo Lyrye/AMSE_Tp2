@@ -1,6 +1,6 @@
 # tp2_jeu_de_taquin
 
-A new Flutter project.
+A new Flutter application.
 
 ## Getting Started
 
