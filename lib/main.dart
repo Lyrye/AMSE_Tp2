@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
 
   //static Exercice1 exo1 = new Exercice1();
-  static Exercice3 exo3 = new Exercice3();
+  static DisplayExercice exo3 = new DisplayExercice();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class Exercice1 extends StatelessWidget {
+import 'Tile.dart';
+
+class DisplayImage extends StatelessWidget {
 
   Widget build(BuildContext context) {
     var mediaQueryData = MediaQuery.of(context);
@@ -20,19 +22,18 @@ class Exercice1 extends StatelessWidget {
   }
 }
 
-class Exercice2 extends StatefulWidget {
+class RotateResizeMirrorWidget extends StatefulWidget {
 
   @override
-  _Exercice2State createState() => _Exercice2State();
+  _RotateResizeMirrorWidgetState createState() => _RotateResizeMirrorWidgetState();
 }
 
-class _Exercice2State extends State<Exercice2> {
+class _RotateResizeMirrorWidgetState extends State<RotateResizeMirrorWidget> {
   double _currentSlider1Value = 0.0;
   double _currentSlider2Value = 0.0;
   double _currentSlider3Value = 100.0;
   bool _mirror = false;
   Image image = Image.network("https://picsum.photos/512/1024");
-  double _size;
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +157,7 @@ class _Exercice2State extends State<Exercice2> {
   }
 }
 
-  class Exercice3 extends StatelessWidget{
+class DisplayExercice extends StatelessWidget{
     @override
     Widget build(BuildContext context) {
       return ListView(
@@ -165,18 +166,34 @@ class _Exercice2State extends State<Exercice2> {
             ListTile(
               title: Text("Exercice 1"),
               subtitle: Text("Affichage d'une image"),
-              leading: Icon(Icons.play_arrow_rounded),
+              leading: Icon(Icons.wb_sunny_outlined),
               onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Exercice1()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>DisplayImage()));
           },)),
           Card(child:
             ListTile(
-              leading: Icon(Icons.play_arrow_rounded),
+              leading: Icon(Icons.wb_sunny_outlined),
               title: Text("Exercice 2"),
               subtitle: Text("Rotation, taille et mode miroir"),
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Exercice2()));
-              },))
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>RotateResizeMirrorWidget()));
+              },)),
+          Card(child:
+            ListTile(
+              leading: Icon(Icons.wb_sunny_outlined),
+              title: Text("Exercice 4"),
+              subtitle: Text("Affichage d'une tuile a a partir d'une image"),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>DisplayTileWidget()));
+            },)),
+          Card(child:
+            ListTile(
+              leading: Icon(Icons.wb_sunny_outlined),
+              title: Text("Exercice 5"),
+              subtitle: Text("Affichage d'une tuile a a partir d'une image"),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ImageGridViewTile()));
+            },))
         ],
 
       );
@@ -185,22 +202,5 @@ class _Exercice2State extends State<Exercice2> {
 
   }
 
-  class Exercice4 extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-
-          title: Text("Exercice 1"),
-        ),
-        body: Center(
-          child: Container(
-              child: Image.network("https://picsum.photos/512/1024")),
-        )
-    );
-  }
-
-
-  }
 
 
