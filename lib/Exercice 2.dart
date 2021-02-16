@@ -2,26 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import 'Tile.dart';
-
-class DisplayImage extends StatelessWidget {
-
-  Widget build(BuildContext context) {
-    var mediaQueryData = MediaQuery.of(context);
-    return Scaffold(
-        appBar: AppBar(
-
-          title: Text("Exercice 1"),
-        ),
-        body: Center(
-          child: Container(
-              height: mediaQueryData.size.height - 200,
-              child: Image.network("https://picsum.photos/512/1024")),
-        )
-    );
-  }
-}
-
 class RotateResizeMirrorWidget extends StatefulWidget {
 
   @override
@@ -156,51 +136,3 @@ class _RotateResizeMirrorWidgetState extends State<RotateResizeMirrorWidget> {
         ));
   }
 }
-
-class DisplayExercice extends StatelessWidget{
-    @override
-    Widget build(BuildContext context) {
-      return ListView(
-        children: [
-          Card(child:
-            ListTile(
-              title: Text("Exercice 1"),
-              subtitle: Text("Affichage d'une image"),
-              leading: Icon(Icons.wb_sunny_outlined),
-              onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>DisplayImage()));
-          },)),
-          Card(child:
-            ListTile(
-              leading: Icon(Icons.wb_sunny_outlined),
-              title: Text("Exercice 2"),
-              subtitle: Text("Rotation, taille et mode miroir"),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>RotateResizeMirrorWidget()));
-              },)),
-          Card(child:
-            ListTile(
-              leading: Icon(Icons.wb_sunny_outlined),
-              title: Text("Exercice 4"),
-              subtitle: Text("Affichage d'une tuile a a partir d'une image"),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>DisplayTileWidget()));
-            },)),
-          Card(child:
-            ListTile(
-              leading: Icon(Icons.wb_sunny_outlined),
-              title: Text("Exercice 5"),
-              subtitle: Text("Affichage d'une tuile a a partir d'une image"),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>ImageGridViewTile()));
-            },))
-        ],
-
-      );
-    }
-
-
-  }
-
-
-

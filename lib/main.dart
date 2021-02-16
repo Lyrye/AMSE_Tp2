@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'Exo.dart';
-
+import 'Exercice 3.dart';
 void main() {
   runApp(MyApp());
 }
@@ -33,7 +31,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
 
-  //static Exercice1 exo1 = new Exercice1();
   static DisplayExercice exo3 = new DisplayExercice();
   @override
   Widget build(BuildContext context) {
