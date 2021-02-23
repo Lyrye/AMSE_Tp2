@@ -68,6 +68,18 @@ class _ImageGridViewTileState extends State<ImageGridViewTile> {
     return lw;
   }
 
+  Widget creatGridView(List <TileUp> _listTile, int value)
+  {
+    return GridView.count(
+      children: createWidgetList(_listTile, value),
+      mainAxisSpacing: 2,
+      crossAxisSpacing: 2,
+      crossAxisCount: value,
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+    );
+  }
+
 
   Widget build(BuildContext context) {
     var mediaQueryData = MediaQuery.of(context);
@@ -86,14 +98,7 @@ class _ImageGridViewTileState extends State<ImageGridViewTile> {
                   height: 500,
                   width: 400,
                   child:Container(
-                    child: GridView.count(
-                      children: createWidgetList(_listTile, _currentSliderValue),
-                      mainAxisSpacing: 2,
-                      crossAxisSpacing: 2,
-                      crossAxisCount: _currentSliderValue,
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                    ),
+                    child: creatGridView(_listTile,_currentSliderValue)
                   ),
                 ),
                 Container(
