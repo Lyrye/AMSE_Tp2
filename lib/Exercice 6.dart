@@ -66,27 +66,25 @@ class PositionedTilesState extends State<PositionedTiles> {
 
               child: TileWidget(new Tile(Colors.white, 0)),
             );
-          }
-          else
+          } else
             {
               return Container (
                   child: InkWell(
                      child: _listTile[index],
-
                     onTap: ()
                     {
                       if (index == indexSwap -1 || index == indexSwap +1 || index == indexSwap -_currentSliderValue || index == indexSwap +_currentSliderValue )
                       {
                         swapTiles(index, indexSwap);
                       }
-                },
-              )
+                    },
+                )
               );
             }
-          });
-
-
+          }
+        );
   }
+
   int _currentSliderValue = 3;
 
   List<Widget> tiles = List<Widget>.generate(10*10, (index) => TileWidget(Tile.randomColor(index)));

@@ -7,6 +7,7 @@ import 'Exercice 2.dart';
 import 'Exercice 4.dart';
 import 'Exercice 5.dart';
 import 'Exercice 6.dart';
+import 'Exercice 7.dart';
 
 class DisplayExercice extends StatelessWidget{
   @override
@@ -52,6 +53,14 @@ class DisplayExercice extends StatelessWidget{
           subtitle: Text("Affichage d'une tuile a a partir d'une image"),
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context)=>PositionedTiles()));
+          },)),
+        Card(child:
+        ListTile(
+          leading: Icon(Icons.wb_sunny_outlined),
+          title: Text("Exercice 7"),
+          subtitle: Text("Affichage d'une tuile a a partir d'une image"),
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>ImageGridViewTileSwap()));
           },))
       ],
 

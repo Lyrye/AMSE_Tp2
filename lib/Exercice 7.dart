@@ -1,0 +1,214 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'dart:math';
+
+
+class TileUp {
+  String imageURL;
+  Alignment alignment;
+  int index;
+
+  TileUp({this.imageURL, this.alignment, this.index});
+  int getIndex ()
+  {
+    return this.index;
+  }
+
+  Widget croppedImageTile(int size) {
+    return FittedBox(
+      fit: BoxFit.fill,
+      child: ClipRect(
+        child: Container(
+          child: Align(
+            alignment: this.alignment,
+            widthFactor: 1/size,
+            heightFactor: 1/size,
+            child: Image.network(this.imageURL),
+          ),
+        ),
+      ),
+    );
+  }
+}
+List <TileUp> createListTile (int value, String imageURL)
+{
+  double pas = (2/((value-1)));
+  List <TileUp> _listTile = <TileUp>[];
+  double i;
+  double j;
+  int index =0;
+  for(i = -1 ; i <=1; i+=pas)
+  {
+    for (j=-1; j<=1; j +=pas) {
+      _listTile.add(new TileUp(
+          imageURL: imageURL,
+          alignment:Alignment(j, i),index: index));
+      index ++;
+    }
+  }
+  return _listTile;
+}
+Widget createTileUpWidgetFrom(TileUp tile, int size) {
+  return InkWell(
+    child: tile.croppedImageTile(size),
+  );
+}
+
+List<Widget> createWidgetList(List<TileUp> lt,int size){
+  List<Widget> lw =<Widget>[];
+  for(int i=0;i<lt.length;i++){
+    lw.add(createTileUpWidgetFrom(lt[i], size));
+  }
+  return lw;
+}
+
+class ImageGridViewTileSwap extends StatefulWidget{
+  @override
+  _ImageGridViewTileSwapState createState() => _ImageGridViewTileSwapState();
+}
+
+class _ImageGridViewTileSwapState extends State<ImageGridViewTileSwap> {
+  int _currentSliderValue = 3;
+  String imageURL = "https://picsum.photos/512";
+  List <Widget> _listTile = createWidgetList(createListTile(3,"https://picsum.photos/512"), 3);
+  int indexSwap = 0;
+
+  GridView creatGridView(List <Widget> _listTile, int value)
+  {
+    return GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: value,
+            crossAxisSpacing: 2.0,
+            mainAxisSpacing: 2.0
+        ),
+        itemCount: value * value,
+        itemBuilder: (BuildContext context, int index) {
+          if (index == indexSwap) {
+            return Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Colors.black,
+                        width: 2)
+                ),
+                child: Container(
+                  color: Colors.white,
+                )
+            );
+          }
+          else {
+            return Container(
+                child: InkWell(
+                  child: _listTile[index],
+                  onTap: () {
+                    if (index == indexSwap -1 || index == indexSwap +1 || index == indexSwap -_currentSliderValue || index == indexSwap +_currentSliderValue )
+                    {
+                      swapTiles(index, indexSwap);
+                    }
+                  },
+                )
+            );
+          }
+        }
+      );
+  }
+
+  Widget build(BuildContext context) {
+    var mediaQueryData = MediaQuery.of(context);
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Exercice 7 - Jeu du taquin"),
+        ),
+        body: Center(
+            child: ListView(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              children: [
+                SizedBox(
+                  height: 500,
+                  width: 400,
+                  child:Container(
+                      child: creatGridView(_listTile,_currentSliderValue)
+                  ),
+                ),
+                Container(
+                  width: mediaQueryData.size.width * (7 / 8),
+                  child: Slider(
+                      value: _currentSliderValue.toDouble(),
+                      min: 2,
+                      max: 10,
+                      divisions: 9,
+                      label: _currentSliderValue.round().toString(),
+                      onChanged: (double value) {
+                        setState(() {
+                          indexSwap = 0;
+                          _currentSliderValue = value.toInt();
+                          _listTile = createWidgetList(createListTile(_currentSliderValue,"https://picsum.photos/512"), _currentSliderValue);
+                        });
+                      }),)
+              ],
+            )
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            mixTiles(100);
+          },
+          child: Icon(Icons.play_arrow_rounded),
+          backgroundColor: Colors.deepPurple,
+        ),
+        floatingActionButtonLocation:FloatingActionButtonLocation.centerDocked
+
+    );
+  }
+
+  swapTiles(int index1, int emptyIndex) {
+    setState(() {
+      print("Button pressed");
+      _listTile.insert(index1, _listTile.removeAt(emptyIndex));
+      if (index1 == _currentSliderValue+emptyIndex )
+      {
+        _listTile.insert(emptyIndex, _listTile.removeAt(index1-1));
+      }
+      if (index1 == emptyIndex -_currentSliderValue)
+      {
+        _listTile.insert(emptyIndex, _listTile.removeAt(index1+1));
+      }
+      indexSwap = index1;
+    });
+  }
+
+  mixTiles(int mixMouvement)
+  {
+    Random random = new Random ();
+    int rng = random.nextInt(3);
+    int mouvement ;
+    indexSwap = random.nextInt(_currentSliderValue);
+
+
+    for (int i = 0; i<mixMouvement; i++)
+      {
+        rng = random.nextInt(3);
+        switch (rng){
+
+          case 0:
+            mouvement = indexSwap +1;
+            break;
+          case 1:
+            mouvement = indexSwap -1;
+            break;
+          case 2:
+            mouvement = indexSwap - _currentSliderValue;
+            break;
+          case 3:
+            mouvement = indexSwap + _currentSliderValue;
+        }
+
+        if (mouvement > (_currentSliderValue * _currentSliderValue )-1 || mouvement < 0)
+        {
+          mouvement = indexSwap;
+        }
+          print (mouvement);
+        print(indexSwap);
+        swapTiles(mouvement, indexSwap);
+      }
+  }
+}
