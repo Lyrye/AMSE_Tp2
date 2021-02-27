@@ -1,7 +1,7 @@
 # tp2_jeu_de_taquin
 
 
-Tp1
+Tp2
 # Présentation du projet
 Cette aplication flutter contient plusieurs exercice de manipulation d'imgage ainsi qu'un jeu du Taquin.
 
